@@ -30,6 +30,7 @@
 #include "hal/hal_system.h"
 #include "config/config.h"
 #include "split/split.h"
+#include "hal/hal_bsp.h"
 
 /* BLE */
 #include "nimble/ble.h"
@@ -41,6 +42,7 @@
 
 /** Log data. */
 struct log bleprph_log;
+uint32_t g_bletest_hw_id[4];
 
 static int bleprph_gap_event(struct ble_gap_event *event, void *arg);
 
@@ -275,8 +277,16 @@ main(void)
     // rc = gatt_svr_init()
     // assert(rc == 0);
 
+    /* Read unique HW id */
+    rc = hal_bsp_hw_id((void *)&g_bletest_hw_id[0], sizeof(g_bletest_hw_id));
+    assert(rc == 16);
+
+    /* Create the default device name. */
+    char name[10];
+    sprintf(name, "newt %04x", (unsigned int)(g_bletest_hw_id[3] & 0xFFFF));
+
     /* Set the default device name. */
-    rc = ble_svc_gap_device_name_set("nimble-bleprph");
+    rc = ble_svc_gap_device_name_set(name);
     assert(rc == 0);
 
     conf_load();
