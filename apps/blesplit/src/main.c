@@ -113,11 +113,11 @@ blesplit_advertise(void)
     fields.name_len = strlen(name);
     fields.name_is_complete = 1;
 
-    fields.uuids16 = (ble_uuid16_t[]){
-        BLE_UUID16_INIT(GATT_SVR_SVC_ALERT_UUID)
-    };
-    fields.num_uuids16 = 1;
-    fields.uuids16_is_complete = 1;
+    // fields.uuids16 = (ble_uuid16_t[]){
+    //     BLE_UUID16_INIT(GATT_SVR_SVC_ALERT_UUID)
+    // };
+    // fields.num_uuids16 = 1;
+    // fields.uuids16_is_complete = 1;
 
     rc = ble_gap_adv_set_fields(&fields);
     if (rc != 0) {

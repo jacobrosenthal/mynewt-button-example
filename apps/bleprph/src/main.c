@@ -113,11 +113,11 @@ bleprph_advertise(void)
     fields.name_len = strlen(name);
     fields.name_is_complete = 1;
 
-    fields.uuids16 = (ble_uuid16_t[]){
-        BLE_UUID16_INIT(GATT_SVR_SVC_ALERT_UUID)
-    };
-    fields.num_uuids16 = 1;
-    fields.uuids16_is_complete = 1;
+    // fields.uuids16 = (ble_uuid16_t[]){
+    //     BLE_UUID16_INIT(GATT_SVR_SVC_ALERT_UUID)
+    // };
+    // fields.num_uuids16 = 1;
+    // fields.uuids16_is_complete = 1;
 
     rc = ble_gap_adv_set_fields(&fields);
     if (rc != 0) {
@@ -270,10 +270,10 @@ main(void)
                  LOG_SYSLEVEL);
     ble_hs_cfg.reset_cb = bleprph_on_reset;
     ble_hs_cfg.sync_cb = bleprph_on_sync;
-    ble_hs_cfg.gatts_register_cb = gatt_svr_register_cb;
+    // ble_hs_cfg.gatts_register_cb = gatt_svr_register_cb;
 
-    rc = gatt_svr_init();
-    assert(rc == 0);
+    // rc = gatt_svr_init()
+    // assert(rc == 0);
 
     /* Set the default device name. */
     rc = ble_svc_gap_device_name_set("nimble-bleprph");
